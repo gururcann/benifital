@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+/*-----------------------------------------------------------------------------------
+
+    Item Name: Ekka - Ecommerce HTML Template.
+    Author: ashishmaraviya
+    Version: 3.2
+    Copyright 2021-2022
+	Author URI: https://themeforest.net/user/ashishmaraviya
+
+-----------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------
+    Included CSS INDEX
+-----------------------------------------------------------------------------------
+
+01. Typography
+02. Components
+    - Helper
+    - Common
+    - Popup Model
+    - Breadcrumb
+03. Layout 
+    - Header Section
+    - Mainslider Section
+    - Product Tab Section
+    - Banner Section
+    - Category Section
+    - Specials Section
+    - Services Section
+    - Offer Section
+    - New Product Section
+    - Testimonial Section
+    - Brand Section
+    - Instagram Section
+    - Footer Section
+    - Quickview Section
+    - Category Section
+    - Category Sidebar
+04. Pages
+    - Shop Page
+    - Login Page
+    - Register Page
+    - About us Page
+    - Term Page
+    - Contact us Page
+    - Faq Page
+    - Single Product Page
+    - Blog Page
+    - Cart Page
+    - Compare Page
+    - Track Order Page
+    - Checkout Page    
+    - Elements Tabs Page
+    - Elements Categories Page
+    - Elements Buttons Page
+    - Elements Products Page
+    - Elements Title Page
+    - Elements Coming-Soon Page
+    - Elements Blog Page
+    - Elements Typography Page
+    - Vendor Page
+    - User Page
+    - Offer Page
+
+-----------------------------------------------------------------------------------*/
+
+// Typography ( Import Typography )
+@import "base/typography";
+
+// Utilities ( Import Utilities )
+@import "utilities/variables";
+@import "utilities/mixins";
+
+// Components ( Import Required Components )
+@import "components/helper";
+@import "components/common";
+@import "components/popup-model";
+@import "components/breadcrumb";
+
+// Layout ( Import Required Layout )
+@import "layout/header";
+@import "layout/product-tab";
+@import "layout/services";
+@import "layout/new-product";
+@import "layout/testimonial";
+@import "layout/instagram";
+@import "layout/footer";
+@import "layout/quickview";
+@import "layout/category";
+
+// Pages ( Import CSS for Pages )
+@import "pages/shop-page";
+@import "pages/login-page";
+@import "pages/register-page";
+@import "pages/aboutus-page";
+@import "pages/term-page";
+@import "pages/contactus-page";
+@import "pages/faq-page";
+@import "pages/single-pro-page";
+@import "pages/blog-page";
+@import "pages/cart-page";
+@import "pages/compare-page";
+@import "pages/track-order-page";
+@import "pages/checkout-page";
+@import "pages/elements-tabs";
+@import "pages/elemets-categories";
+@import "pages/elements-buttons";
+@import "pages/elements-products";
+@import "pages/elements-title";
+@import "pages/coming-soon";
+@import "pages/elements-blog";
+@import "pages/elements-typography";
+@import "pages/vendor-pages";
+@import "pages/user-pages";
+@import "pages/hot-offer";
+@import "pages/404-error-page";
+@import "pages/under-maintainace";
+@import "pages/wishlist";
+
+
+
+
+

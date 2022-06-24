@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/*-----------------------------------------------------------------------------------
+
+    Item Name: Ekka - Ecommerce HTML Template.
+    Author: ashishmaraviya
+    Version: 3.2
+    Copyright 2021-2022
+	Author URI: https://themeforest.net/user/ashishmaraviya
+
+-----------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------
+    Skin Color-01 SCSS
+-----------------------------------------------------------------------------------*/
+
+// Utilities ( Import Utilities )
+@import "utilities/variables";
+
+$main-primary-color: #3474d4; // Site main color
+$main-secondary-color: #333; // Site main text hover color
+
+// Utilities ( Import Utilities )
+@import "utilities/mixins";
+
+// Components ( Import Required Components )
+@import "components/helper";
+@import "components/common";
+@import "components/popup-model";
+@import "components/breadcrumb";
+
+// Layout ( Import Required Layout )
+@import "layout/header";
+@import "layout/mainslider";
+@import "layout/product-tab";
+@import "layout/banner";
+@import "layout/category";
+@import "layout/specials";
+@import "layout/services";
+@import "layout/offer";
+@import "layout/new-product";
+@import "layout/testimonial";
+@import "layout/brand";
+@import "layout/instagram";
+@import "layout/footer";
+@import "layout/quickview";
+
+// Pages ( Import CSS for Pages )
+@import "pages/shop-page";
+@import "pages/login-page";
+@import "pages/register-page";
+@import "pages/aboutus-page";
+@import "pages/term-page";
+@import "pages/contactus-page";
+@import "pages/faq-page";
+@import "pages/single-pro-page";
+@import "pages/blog-page";
+@import "pages/cart-page";
+@import "pages/compare-page";
+@import "pages/track-order-page";
+@import "pages/checkout-page";
+@import "pages/elements-tabs";
+@import "pages/elemets-categories";
+@import "pages/elements-buttons";
+@import "pages/elements-products";
+@import "pages/elements-title";
+@import "pages/coming-soon";
+@import "pages/elements-blog";
+@import "pages/elements-typography";
+@import "pages/vendor-pages";
+@import "pages/user-pages";
+@import "pages/hot-offer";
+
+
+
+
+
+

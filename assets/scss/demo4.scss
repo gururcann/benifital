@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/*-----------------------------------------------------------------------------------
+
+    Item Name: Ekka - Ecommerce HTML Template.
+    Author: ashishmaraviya
+    Version: 3.2
+    Copyright 2021-2022
+	Author URI: https://themeforest.net/user/ashishmaraviya
+
+-----------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------
+    Included CSS INDEX
+-----------------------------------------------------------------------------------
+
+01. Typography
+02. Utilities
+03. demo 4 css
+04. Responsive css
+-----------------------------------------------------------------------------------*/
+
+// Typography ( Import Typography )
+@import "base/typography";
+
+// Utilities ( Import Utilities )
+@import "utilities/variables";
+@import "utilities/mixins";
+
+// Components ( Import Required Components )
+
+@import "components/helper";
+@import "components/click-to-call";
+// @import "components/_popup-model";
+@import "layout/header_demo_4";
+@import "layout/footer_demo_4";
+@import "pages/demo4";
+
+
+
+
+
+
+

@@ -1,0 +1,337 @@
+
+/*-------------------------------------------------
+    Banner Section
+---------------------------------------------------*/
+/*-----  Main Banner  -----*/
+.ec-banner {
+    overflow: hidden;
+    display: block;
+}
+
+.ec-banners {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 -15px -15px -15px;
+}
+.ec-banners > * {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-line-pack: justify;
+    align-content: space-between;
+}
+
+.ec-banner-block {
+    padding: 0 15px 15px;
+}
+
+.banner-block {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.banner-block img {
+    width: 100%;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+.banner-block:hover img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.banner-block .banner-text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.banner-block .banner-text .ec-banner-title {
+    font-size: 30px;
+    color: #f3825d;
+    position: relative;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.banner-block .banner-text .ec-banner-title span {
+    font-weight: 700;
+}
+.banner-block .banner-text .ec-banner-stitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    letter-spacing: 0.7px;
+    position: relative;
+    display: block;
+    margin-bottom: 15px;
+}
+.banner-block .banner-text p {
+    margin-bottom: 15px;
+    color: #777;
+}
+.banner-block .banner-content {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    padding: 15px 72px;
+}
+.banner-block .banner-content .ec-banner-btn a {
+    border-width: 1px;
+    border-style: solid;
+    font-size: 14px;
+    border-radius: 0;
+    letter-spacing: 0.6px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+}
+
+/*-----  Banner-02  -----*/
+.ec-banner-block-2 .banner-block .banner-text .ec-banner-stitle {
+    margin-bottom: 7px;
+    padding-bottom: 11px;
+}
+.ec-banner-block-2 .banner-block .banner-text .ec-banner-stitle:before {
+    content: "";
+    position: absolute;
+    top: auto;
+    height: 3px;
+    width: 28px;
+    margin: 0 auto;
+    background: #000;
+    bottom: 0;
+}
+.ec-banner-block-2 .banner-block .banner-text .ec-banner-title {
+    line-height: 1.2;
+    margin-bottom: 13px;
+}
+
+.ec-banner-right .banner-block .banner-content {
+    padding: 15px 59px;
+}
+
+/*-----  Banner-03  -----*/
+.ec-banner-block-3 .banner-block > a {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.ec-banner-block-3 .banner-block .banner-text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.ec-banner-block-3 .banner-block .banner-text .ec-banner-title {
+    font-size: 20px;
+    letter-spacing: 0.7px;
+    margin-bottom: 3px;
+}
+.ec-banner-block-3 .banner-block .banner-text .ec-banner-stitle {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    margin-bottom: 1px;
+    position: relative;
+}
+.ec-banner-block-3 .banner-block .banner-text .ec-banner-stitle:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    width: 25px;
+    margin: 0 auto;
+    background: #000;
+    left: 108%;
+    right: auto;
+}
+.ec-banner-block-3 .banner-block .banner-text .ec-banner-stitle:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    width: 25px;
+    margin: 0 auto;
+    background: #000;
+    left: 108%;
+    right: auto;
+    right: 108%;
+    left: auto;
+}
+.ec-banner-block-3 .banner-block .banner-text .ec-banner-desc {
+    font-size: 14px;
+    font-weight: 700;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+.ec-banner-block-3 .banner-block .banner-text .ec-banner-desc span {
+    color: #f3825d;
+}
+.ec-banner-block-3 .banner-block .banner-content {
+    padding: 19px 15px;
+    width: 100%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+/*-----  Banner-04  -----*/
+.ec-banner-block-4 .banner-block > a {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+}
+.ec-banner-block-4 .banner-block .banner-text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.ec-banner-block-4 .banner-block .banner-text .ec-banner-stitle {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+.ec-banner-block-4 .banner-block .banner-text .ec-banner-title {
+    font-size: 24px;
+    letter-spacing: 0.7px;
+    margin-bottom: 11px;
+}
+.ec-banner-block-4 .banner-block .banner-content {
+    padding: 15px;
+    width: 100%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+
+/*-------------------------------------------------
+    About Section
+---------------------------------------------------*/
+.ec-about-sec .ec-about img {
+    width: 100%;
+}
+.ec-about-sec .ec-about-detail {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.ec-about-sec .ec-about-detail a {
+    width: 130px;
+    margin-top: 10px;
+}
+.ec-about-sec .ec-about-detail h4, .ec-about-sec .ec-about-detail .h4 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #222;
+}
+.ec-about-sec .ec-about-detail h5, .ec-about-sec .ec-about-detail .h5 {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444444;
+    line-height: 28px;
+}
+.ec-about-sec .ec-about-detail p {
+    font-size: 16px;
+    line-height: 30px;
+    color: #777;
+}
+
+.ec-banner-block.ec-banner-block-2{
+    height: inherit;
+}
+
+.header-logo img {
+    width: 175px;
+}
+
+/*ÜRÜN DETAY SAYFASI*/
+/*.single-pro-desc-no-sidebar {*/
+/*    width: 40%;*/
+/*}*/
+
+/*.single-pro-img-no-sidebar{*/
+/*    width: 60%;*/
+/*}*/

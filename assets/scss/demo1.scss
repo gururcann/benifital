@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+/*-----------------------------------------------------------------------------------
+
+    Item Name: Ekka - Ecommerce HTML Template.
+    Author: ashishmaraviya
+    Version: 3.2
+    Copyright 2021-2022
+	Author URI: https://themeforest.net/user/ashishmaraviya
+
+-----------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------
+    Included CSS INDEX
+-----------------------------------------------------------------------------------
+
+01. Typography
+02. Components
+    - Helper
+    - Common
+    - Popup Model
+    - Breadcrumb
+03. Layout 
+    - Header Section
+    - Mainslider Section
+    - Product Tab Section
+    - Banner Section
+    - Category Section
+    - Specials Section
+    - Services Section
+    - Offer Section
+    - New Product Section
+    - Testimonial Section
+    - Brand Section
+    - Instagram Section
+    - Footer Section
+    - Quickview Section
+-----------------------------------------------------------------------------------*/
+
+// Typography ( Import Typography )
+@import "base/typography";
+
+// Utilities ( Import Utilities )
+@import "utilities/variables";
+@import "utilities/mixins";
+
+// Components ( Import Required Components )
+@import "components/helper";
+@import "components/common";
+@import "components/popup-model";
+@import "components/breadcrumb";
+
+// Layout ( Import Required Layout )
+@import "layout/header";
+@import "layout/mainslider";
+@import "layout/product-tab";
+@import "layout/banner";
+@import "layout/category";
+@import "layout/specials";
+@import "layout/vendor";
+@import "layout/services";
+@import "layout/offer";
+@import "layout/new-product";
+@import "layout/testimonial";
+@import "layout/brand";
+@import "layout/instagram";
+@import "layout/footer";
+@import "layout/quickview";
+@import "layout/category-sidebar";
+
+
+
+
+
+
