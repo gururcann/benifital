@@ -6,20 +6,23 @@
 <?php include "menu.php"; ?>
 <?php
 include "functions/products/products.php";
-include "functions/cart/addtocart.php";
+include "functions/cart/cartprocess.php";
 $productID = $_GET["productID"];
 foreach (_productsDetails($productID) as $productsDetail);
 if($productsDetail == null){
     header("location:index.php");
 }
+
+//SEPET İŞLEMLERİ
 if(isset($_POST["quantity"])){
-    _addtocart(
-        $_POST["cartMemberID"],
-        $_POST["cartProductID"],
-        $_POST["cartQuantity"]
-    );
-    echo $_POST["cartMemberID"]." ".$_POST["cartProductID"]." ".$_POST["cartQuantity"];
+//    _addtocart(1,$productID,$_POST["cartQuantity"]);
+    //SEPET SESSIONS İŞLEMLERİ
+    _addtocartSession(1,$productID,$_POST["cartQuantity"],rand(0,99999999999));
 }
+
+//TEST
+print_r($_SESSION["cartSession"]);
+echo count($_SESSION["cartSession"]);
 ?>
 <!-- Ec breadcrumb start -->
 <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
@@ -92,25 +95,22 @@ if(isset($_POST["quantity"])){
                                             <i class="ecicon eci-star fill"></i>
                                             <i class="ecicon eci-star-o"></i>
                                         </div>
-                                        <span class="ec-read-review"><a href="#ec-spt-nav-review">Be the first to
-                                                    review this product</a></span>
+                                        <span class="ec-read-review"><a href="#ec-spt-nav-review">Ürün hakkında yorumları gör!</a></span>
                                     </div>
                                     <div class="ec-single-desc"><?php echo $productsDetail["productsShortDesc"];?></div>
 
                                     <div class="ec-single-sales">
                                         <div class="ec-single-sales-inner">
                                             <div class="ec-single-sales-title">sales accelerators</div>
-                                            <div class="ec-single-sales-visitor">real time <span>24</span> visitor
-                                                right now!</div>
+                                            <div class="ec-single-sales-visitor">Bu fiyatta son <span>24</span> ürün kaldı!</div>
                                             <div class="ec-single-sales-progress">
-                                                    <span class="ec-single-progress-desc">Hurry up!left 29 in
-                                                        stock</span>
+                                                    <span class="ec-single-progress-desc">Bugün bu fırsattan 29 kişi faydalandı!</span>
                                                 <span class="ec-single-progressbar"></span>
                                             </div>
                                             <div class="ec-single-sales-countdown">
                                                 <div class="ec-single-countdown"><span
                                                             id="ec-single-countdown"></span></div>
-                                                <div class="ec-single-count-desc">Time is Running Out!</div>
+                                                <div class="ec-single-count-desc">Kampanyanın bitmesi kalan süre!</div>
                                             </div>
                                         </div>
                                     </div>
@@ -147,11 +147,11 @@ if(isset($_POST["quantity"])){
 <!--                                        </div>-->
 <!--                                    </div>-->
                                     <div class="ec-single-qty">
-                                        <form method="POST">
+                                        <form action="#" method="POST">
                                             <div class="qty-plus-minus" style="float: left">
-                                                <input type="hidden" value="<?php echo 1; ?>" name="cartMemberID"/>
-                                                <input type="hidden" value="<?php echo $productID; ?>" name="cartProductID"/>
-                                                <input type="text" class="qty-input"  name="cartQuantity" value="1"/>
+                                                <label>
+                                                    <input type="text" class="qty-input"  name="cartQuantity" value="1">
+                                                </label>
                                             </div>
                                             <div class="ec-single-cart " style="float: left">
                                                 <input type="submit" class="btn btn-primary" name="quantity" style="width: 100%;" value="SEPETE EKLE">

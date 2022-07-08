@@ -1,8 +1,10 @@
 <?php
 session_start();
-$random = rand(0,99999999999);
-$notMembersID = $random;
+//LOGİN OLUNMAMIŞSA MEMBERSID
 if(!isset($_SESSION["login"]) && !isset($_SESSION["membersID"])){
-    $_SESSION["notMembersID"] = $notMembersID;
+    $_SESSION["notMembersID"] = rand(0,99999999999);
+}else{
+//LOGİN OLUNMUŞSA MEMBERSID
+    $_SESSION["membersID"] = 1;
 }
 ?>

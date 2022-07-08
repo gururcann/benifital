@@ -335,3 +335,9 @@
 /*.single-pro-img-no-sidebar{*/
 /*    width: 60%;*/
 /*}*/
+
+@media only screen and (max-width: 767px){
+    .ec-cart-content .table-content table td::before {
+        min-width: 76px;
+    }
+}

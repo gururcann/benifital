@@ -1,10 +1,9 @@
 <?php
-require "src/database_connection.php";
 
 //TÜM ÜRÜNLER
 function _products(){
-    $productsQuery_ = db_connect()->prepare("SELECT * FROM products");
-    $productsQuery_->execute();
+    $productsQuery_ = db_connect()->prepare("SELECT * FROM products WHERE productsSeller = ?");
+    $productsQuery_->execute(array(0));
     foreach ($productsQuery_ as $productsQuery) {
         $result[] = $productsQuery;
     }

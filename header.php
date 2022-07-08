@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION["cartSession"])){
+    $_SESSION["cartSession"] = array();
+}
+include "src/database_connection.php";
 ?>
 <head>
     <meta charset="UTF-8">

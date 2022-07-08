@@ -3,6 +3,14 @@
 <?php include 'header.php'; ?>
 <body class="checkout_page">
 <?php include 'menu.php'; ?>
+<?php
+include "functions/cart/cartprocess.php";
+//SEPET İŞLEMLERİ
+if(isset($_POST["cartUpdate"])){
+    //SEPET SESSIONS İŞLEMLERİ
+    _cartUpdate(1,$_POST["productID"],$_POST["cartQuantity"],rand(0,99999999999));
+}
+?>
 <body>
 <!-- Ec breadcrumb start -->
 <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
@@ -36,107 +44,73 @@
                 <div class="ec-cart-content">
                     <div class="ec-cart-inner">
                         <div class="row">
-                            <form action="#">
                                 <div class="table-content cart-table-content">
                                     <table>
                                         <thead>
                                         <tr>
-                                            <th>Product</th>
-                                            <th>Price</th>
-                                            <th style="text-align: center;">Quantity</th>
-                                            <th>Total</th>
+                                            <th>Ürün</th>
+                                            <th>Tutar</th>
+                                            <th style="text-align: center;">Adet</th>
+                                            <th>Toplam</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td data-label="Product" class="ec-cart-pro-name"><a
-                                                    href="product-left-sidebar.html"><img class="ec-cart-pro-img mr-4"
-                                                                                          src="assets/images/product-image/1.jpg"
-                                                                                          alt="" />Stylish Baby Shoes</a></td>
-                                            <td data-label="Price" class="ec-cart-pro-price"><span
-                                                    class="amount">$56.00</span></td>
-                                            <td data-label="Quantity" class="ec-cart-pro-qty"
+                                        <?php
+                                            $productTotal= 0.0;
+                                            $cartTotal= 0.0;
+                                            if (count($_SESSION["cartSession"]) > 0){
+                                            foreach ($_SESSION["cartSession"] as $cartListing){
+                                                echo $cartListing["productID"];
+                                                $cartProduct_ = db_connect()->prepare("SELECT * FROM products WHERE productsID = ?");
+                                                $cartProduct_->execute(array($cartListing["productID"]));
+                                                foreach ($cartProduct_ as $cartProduct);
+                                                $productTotal += $cartProduct["productsNewPrice"]*$cartListing["cartQuantity"];
+                                        ?>
+                                            <tr>
+                                            <td data-label="Ürün" class="ec-cart-pro-name">
+                                                <?php
+                                                $imageQuery_ = db_connect()->prepare("SELECT * FROM images WHERE imagePID = ? ORDER BY imageID ASC ");
+                                                $imageQuery_->execute(array($cartListing["productID"]));
+                                                foreach ($imageQuery_ as $imageQuery) {
+                                                    ?>
+                                                    <a href="">
+                                                        <img style="width: 85px" class="ec-cart-pro-img mr-4" src="https://biofeline.com/<?php echo $imageQuery['imageUrl'];?>" alt="Product image"/>
+                                                        <span style="font-size: 14px"><?php echo $cartProduct["productsName"]?></span>
+                                                    </a>
+                                                <?php } ?>
+                                            </td>
+
+                                            <td data-label="Fiyat" class="ec-cart-pro-price">
+                                                <span class="amount"><?php echo number_format($cartProduct["productsNewPrice"],2)?>₺</span>
+                                            </td>
+                                            <td data-label="Miktar" class="ec-cart-pro-qty"
                                                 style="text-align: center;">
                                                 <div class="cart-qty-plus-minus">
-                                                    <input class="cart-plus-minus" type="text"
-                                                           name="cartqtybutton" value="1" />
+                                                    <form action="" method="post">
+                                                        <input type="text" class="cart-plus-minus" name="cartQuantity" value="<?php echo $cartListing["cartQuantity"]?>" >
                                                 </div>
+                                                <input type="hidden" class="cart-plus-minus" name="productID" value="<?php echo $cartListing["productID"]?>" >
+                                                <input type="submit" class="btn-primary btn red" name="cartUpdate" value="Güncelle" style="margin: 10px; width: 125px">
+                                                    </form>
                                             </td>
-                                            <td data-label="Total" class="ec-cart-pro-subtotal">$56.00</td>
-                                            <td data-label="Remove" class="ec-cart-pro-remove">
+                                            <td data-label="Toplam" class="ec-cart-pro-subtotal"><?php echo number_format($cartProduct["productsNewPrice"]*$cartListing["cartQuantity"],2)?>₺</td>
+                                            <td data-label="Kaldır" class="ec-cart-pro-remove">
                                                 <a href="#"><i class="ecicon eci-trash-o"></i></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td data-label="Product" class="ec-cart-pro-name"><a
-                                                    href="product-left-sidebar.html"><img class="ec-cart-pro-img mr-4"
-                                                                                          src="assets/images/product-image/2.jpg"
-                                                                                          alt="" />Unisex Fully Solid Hoodie</a></td>
-                                            <td data-label="Price" class="ec-cart-pro-price"><span
-                                                    class="amount">$75.00</span></td>
-                                            <td data-label="Quantity" class="ec-cart-pro-qty"
-                                                style="text-align: center;">
-                                                <div class="cart-qty-plus-minus">
-                                                    <input class="cart-plus-minus" type="text"
-                                                           name="cartqtybutton" value="1" />
-                                                </div>
-                                            </td>
-                                            <td data-label="Total" class="ec-cart-pro-subtotal">$75.00</td>
-                                            <td data-label="Remove" class="ec-cart-pro-remove">
-                                                <a href="#"><i class="ecicon eci-trash-o"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Product" class="ec-cart-pro-name"><a
-                                                    href="product-left-sidebar.html"><img class="ec-cart-pro-img mr-4"
-                                                                                          src="assets/images/product-image/3.jpg"
-                                                                                          alt="" />Beautiful T-shirt For Women</a></td>
-                                            <td data-label="Price" class="ec-cart-pro-price"><span
-                                                    class="amount">$48.00</span></td>
-                                            <td data-label="Quantity" class="ec-cart-pro-qty"
-                                                style="text-align: center;">
-                                                <div class="cart-qty-plus-minus">
-                                                    <input class="cart-plus-minus" type="text"
-                                                           name="cartqtybutton" value="1" />
-                                                </div>
-                                            </td>
-                                            <td data-label="Total" class="ec-cart-pro-subtotal">$48.00</td>
-                                            <td data-label="Remove" class="ec-cart-pro-remove">
-                                                <a href="#"><i class="ecicon eci-trash-o"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Product" class="ec-cart-pro-name"><a
-                                                    href="product-left-sidebar.html"><img class="ec-cart-pro-img mr-4"
-                                                                                          src="assets/images/product-image/4.jpg"
-                                                                                          alt="" />Wool Hat For Men</a></td>
-                                            <td data-label="Price" class="ec-cart-pro-price"><span
-                                                    class="amount">$95.00</span></td>
-                                            <td data-label="Quantity" class="ec-cart-pro-qty"
-                                                style="text-align: center;">
-                                                <div class="cart-qty-plus-minus">
-                                                    <input class="cart-plus-minus" type="text"
-                                                           name="cartqtybutton" value="1" />
-                                                </div>
-                                            </td>
-                                            <td data-label="Total" class="ec-cart-pro-subtotal">$95.00</td>
-                                            <td data-label="Remove" class="ec-cart-pro-remove">
-                                                <a href="#"><i class="ecicon eci-trash-o"></i></a>
-                                            </td>
-                                        </tr>
+                                        <?php }} ?>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="ec-cart-update-bottom">
-                                            <a href="#">Continue Shopping</a>
-                                            <button class="btn btn-primary">Check Out</button>
+                                            <a href="#">Alışverişe devam et</a>
+                                            <button class="btn btn-primary">Ödemeye Geç</button>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -148,7 +122,7 @@
                     <!-- Sidebar Summary Block -->
                     <div class="ec-sidebar-block">
                         <div class="ec-sb-title">
-                            <h3 class="ec-sidebar-title">Summary</h3>
+                            <h3 class="ec-sidebar-title">Özet</h3>
                         </div>
                         <div class="ec-sb-block-content">
                             <h4 class="ec-ship-title">Sepet Tutarı</h4>
@@ -158,16 +132,29 @@
                             <div class="ec-cart-summary-bottom">
                                 <div class="ec-cart-summary">
                                     <div>
-                                        <span class="text-left">Sub-Total</span>
-                                        <span class="text-right">$80.00</span>
+                                        <span class="text-left">Ürünler</span>
+                                        <span class="text-right"><?php echo number_format($productTotal,2); ?>₺</span>
                                     </div>
                                     <div>
-                                        <span class="text-left">Delivery Charges</span>
-                                        <span class="text-right">$80.00</span>
+                                        <span class="text-left">Kargo Ücreti</span>
+                                        <?php if($productTotal < 150){
+                                            //150₺ ALTINDAYSA 15₺ KARGO ÜCRETİ
+                                            $cartTotal = $productTotal+15;
+                                        ?>
+                                        <span class="text-right">15.00₺</span>
+                                        <?php
+                                        }else{
+                                        ?>
+                                        <span class="text-right">Kargo Bedava!</span>
+                                        <?php
+                                            //150₺ ÜSTÜNDEYSE KARGO BEDAVA
+                                            $cartTotal = $productTotal;
+                                        }
+                                        ?>
                                     </div>
                                     <div>
-                                        <span class="text-left">Coupan Discount</span>
-                                        <span class="text-right"><a class="ec-cart-coupan">Apply Coupan</a></span>
+                                        <span class="text-left">Kupon İndirimi</span>
+                                        <span class="text-right"><a class="ec-cart-coupan">Kupon kullan</a></span>
                                     </div>
                                     <div class="ec-cart-coupan-content">
                                         <form class="ec-cart-coupan-form" name="ec-cart-coupan-form" method="post"
@@ -175,12 +162,12 @@
                                             <input class="ec-coupan" type="text" required=""
                                                    placeholder="Enter Your Coupan Code" name="ec-coupan" value="">
                                             <button class="ec-coupan-btn button btn-primary" type="submit"
-                                                    name="subscribe" value="">Apply</button>
+                                                    name="subscribe" value="">Uygula</button>
                                         </form>
                                     </div>
                                     <div class="ec-cart-summary-total">
-                                        <span class="text-left">Total Amount</span>
-                                        <span class="text-right">$80.00</span>
+                                        <span class="text-left">Toplam Tutar</span>
+                                        <span class="text-right"><?php echo number_format($cartTotal,2); ?>₺</span>
                                     </div>
                                 </div>
 
@@ -193,325 +180,7 @@
         </div>
     </div>
 </section>
-<!-- New Product Start -->
-<section class="section ec-new-product section-space-p">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="section-title">
-                    <h2 class="ec-bg-title">New Arrivals</h2>
-                    <h2 class="ec-title">New Arrivals</h2>
-                    <p class="sub-title">Browse The Collection of Top Products</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <!-- New Product Content -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mb-6 pro-gl-content">
-                <div class="ec-product-inner">
-                    <div class="ec-pro-image-outer">
-                        <div class="ec-pro-image">
-                            <a href="product-left-sidebar.html" class="image">
-                                <img class="main-image"
-                                     src="assets/images/product-image/6_1.jpg" alt="Product" />
-                                <img class="hover-image"
-                                     src="assets/images/product-image/6_2.jpg" alt="Product" />
-                            </a>
-                            <span class="percentage">20%</span>
-                            <a href="#" class="quickview" data-link-action="quickview"
-                               title="Quick view" data-bs-toggle="modal"
-                               data-bs-target="#ec_quickview_modal"><img
-                                    src="assets/images/icons/quickview.svg" class="svg_img pro_svg"
-                                    alt="" /></a>
-                            <div class="ec-pro-actions">
-                                <a href="compare.html" class="ec-btn-group compare"
-                                   title="Compare"><img src="assets/images/icons/compare.svg"
-                                                        class="svg_img pro_svg" alt="" /></a>
-                                <button title="Add To Cart" class=" add-to-cart"><img
-                                        src="assets/images/icons/cart.svg" class="svg_img pro_svg"
-                                        alt="" /> Add To Cart</button>
-                                <a class="ec-btn-group wishlist" title="Wishlist"><img
-                                        src="assets/images/icons/wishlist.svg"
-                                        class="svg_img pro_svg" alt="" /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ec-pro-content">
-                        <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Round Neck T-Shirt</a></h5>
-                        <div class="ec-pro-rating">
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star"></i>
-                        </div>
-                        <div class="ec-pro-list-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dutmmy text ever since the 1500s, when an unknown printer took a galley.</div>
-                        <span class="ec-price">
-                                <span class="old-price">$27.00</span>
-                                <span class="new-price">$22.00</span>
-                            </span>
-                        <div class="ec-pro-option">
-                            <div class="ec-pro-color">
-                                <span class="ec-pro-opt-label">Color</span>
-                                <ul class="ec-opt-swatch ec-change-img">
-                                    <li class="active"><a href="#" class="ec-opt-clr-img"
-                                                          data-src="assets/images/product-image/6_1.jpg"
-                                                          data-src-hover="assets/images/product-image/6_1.jpg"
-                                                          data-tooltip="Gray"><span
-                                                style="background-color:#e8c2ff;"></span></a></li>
-                                    <li><a href="#" class="ec-opt-clr-img"
-                                           data-src="assets/images/product-image/6_2.jpg"
-                                           data-src-hover="assets/images/product-image/6_2.jpg"
-                                           data-tooltip="Orange"><span
-                                                style="background-color:#9cfdd5;"></span></a></li>
-                                </ul>
-                            </div>
-                            <div class="ec-pro-size">
-                                <span class="ec-pro-opt-label">Size</span>
-                                <ul class="ec-opt-size">
-                                    <li class="active"><a href="#" class="ec-opt-sz"
-                                                          data-old="$25.00" data-new="$20.00"
-                                                          data-tooltip="Small">S</a></li>
-                                    <li><a href="#" class="ec-opt-sz" data-old="$27.00"
-                                           data-new="$22.00" data-tooltip="Medium">M</a></li>
-                                    <li><a href="#" class="ec-opt-sz" data-old="$35.00"
-                                           data-new="$30.00" data-tooltip="Extra Large">XL</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mb-6 pro-gl-content">
-                <div class="ec-product-inner">
-                    <div class="ec-pro-image-outer">
-                        <div class="ec-pro-image">
-                            <a href="product-left-sidebar.html" class="image">
-                                <img class="main-image"
-                                     src="assets/images/product-image/7_1.jpg" alt="Product" />
-                                <img class="hover-image"
-                                     src="assets/images/product-image/7_2.jpg" alt="Product" />
-                            </a>
-                            <span class="percentage">20%</span>
-                            <span class="flags">
-                                    <span class="sale">Sale</span>
-                                </span>
-                            <a href="#" class="quickview" data-link-action="quickview"
-                               title="Quick view" data-bs-toggle="modal"
-                               data-bs-target="#ec_quickview_modal"><img
-                                    src="assets/images/icons/quickview.svg" class="svg_img pro_svg"
-                                    alt="" /></a>
-                            <div class="ec-pro-actions">
-                                <a href="compare.html" class="ec-btn-group compare"
-                                   title="Compare"><img src="assets/images/icons/compare.svg"
-                                                        class="svg_img pro_svg" alt="" /></a>
-                                <button title="Add To Cart" class=" add-to-cart"><img
-                                        src="assets/images/icons/cart.svg" class="svg_img pro_svg"
-                                        alt="" /> Add To Cart</button>
-                                <a class="ec-btn-group wishlist" title="Wishlist"><img
-                                        src="assets/images/icons/wishlist.svg"
-                                        class="svg_img pro_svg" alt="" /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ec-pro-content">
-                        <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Full Sleeve Shirt</a></h5>
-                        <div class="ec-pro-rating">
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star"></i>
-                        </div>
-                        <div class="ec-pro-list-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dutmmy text ever since the 1500s, when an unknown printer took a galley.</div>
-                        <span class="ec-price">
-                                <span class="old-price">$12.00</span>
-                                <span class="new-price">$10.00</span>
-                            </span>
-                        <div class="ec-pro-option">
-                            <div class="ec-pro-color">
-                                <span class="ec-pro-opt-label">Color</span>
-                                <ul class="ec-opt-swatch ec-change-img">
-                                    <li class="active"><a href="#" class="ec-opt-clr-img"
-                                                          data-src="assets/images/product-image/7_1.jpg"
-                                                          data-src-hover="assets/images/product-image/7_1.jpg"
-                                                          data-tooltip="Gray"><span
-                                                style="background-color:#01f1f1;"></span></a></li>
-                                    <li><a href="#" class="ec-opt-clr-img"
-                                           data-src="assets/images/product-image/7_2.jpg"
-                                           data-src-hover="assets/images/product-image/7_2.jpg"
-                                           data-tooltip="Orange"><span
-                                                style="background-color:#b89df8;"></span></a></li>
-                                </ul>
-                            </div>
-                            <div class="ec-pro-size">
-                                <span class="ec-pro-opt-label">Size</span>
-                                <ul class="ec-opt-size">
-                                    <li class="active"><a href="#" class="ec-opt-sz"
-                                                          data-old="$12.00" data-new="$10.00"
-                                                          data-tooltip="Small">S</a></li>
-                                    <li><a href="#" class="ec-opt-sz" data-old="$15.00"
-                                           data-new="$12.00" data-tooltip="Medium">M</a></li>
-                                    <li><a href="#" class="ec-opt-sz" data-old="$20.00"
-                                           data-new="$17.00" data-tooltip="Extra Large">XL</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mb-6 pro-gl-content">
-                <div class="ec-product-inner">
-                    <div class="ec-pro-image-outer">
-                        <div class="ec-pro-image">
-                            <a href="product-left-sidebar.html" class="image">
-                                <img class="main-image"
-                                     src="assets/images/product-image/1_1.jpg" alt="Product" />
-                                <img class="hover-image"
-                                     src="assets/images/product-image/1_2.jpg" alt="Product" />
-                            </a>
-                            <span class="percentage">20%</span>
-                            <span class="flags">
-                                    <span class="sale">Sale</span>
-                                </span>
-                            <a href="#" class="quickview" data-link-action="quickview"
-                               title="Quick view" data-bs-toggle="modal"
-                               data-bs-target="#ec_quickview_modal"><img
-                                    src="assets/images/icons/quickview.svg" class="svg_img pro_svg"
-                                    alt="" /></a>
-                            <div class="ec-pro-actions">
-                                <a href="compare.html" class="ec-btn-group compare"
-                                   title="Compare"><img src="assets/images/icons/compare.svg"
-                                                        class="svg_img pro_svg" alt="" /></a>
-                                <button title="Add To Cart" class=" add-to-cart"><img
-                                        src="assets/images/icons/cart.svg" class="svg_img pro_svg"
-                                        alt="" /> Add To Cart</button>
-                                <a class="ec-btn-group wishlist" title="Wishlist"><img
-                                        src="assets/images/icons/wishlist.svg"
-                                        class="svg_img pro_svg" alt="" /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ec-pro-content">
-                        <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Cute Baby Toy's</a></h5>
-                        <div class="ec-pro-rating">
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star"></i>
-                        </div>
-                        <div class="ec-pro-list-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dutmmy text ever since the 1500s, when an unknown printer took a galley.</div>
-                        <span class="ec-price">
-                                <span class="old-price">$40.00</span>
-                                <span class="new-price">$30.00</span>
-                            </span>
-                        <div class="ec-pro-option">
-                            <div class="ec-pro-color">
-                                <span class="ec-pro-opt-label">Color</span>
-                                <ul class="ec-opt-swatch ec-change-img">
-                                    <li class="active"><a href="#" class="ec-opt-clr-img"
-                                                          data-src="assets/images/product-image/1_1.jpg"
-                                                          data-src-hover="assets/images/product-image/1_1.jpg"
-                                                          data-tooltip="Gray"><span
-                                                style="background-color:#90cdf7;"></span></a></li>
-                                    <li><a href="#" class="ec-opt-clr-img"
-                                           data-src="assets/images/product-image/1_2.jpg"
-                                           data-src-hover="assets/images/product-image/1_2.jpg"
-                                           data-tooltip="Orange"><span
-                                                style="background-color:#ff3b66;"></span></a></li>
-                                    <li><a href="#" class="ec-opt-clr-img"
-                                           data-src="assets/images/product-image/1_3.jpg"
-                                           data-src-hover="assets/images/product-image/1_3.jpg"
-                                           data-tooltip="Green"><span
-                                                style="background-color:#ffc476;"></span></a></li>
-                                    <li><a href="#" class="ec-opt-clr-img"
-                                           data-src="assets/images/product-image/1_4.jpg"
-                                           data-src-hover="assets/images/product-image/1_4.jpg"
-                                           data-tooltip="Sky Blue"><span
-                                                style="background-color:#1af0ba;"></span></a></li>
-                                </ul>
-                            </div>
-                            <div class="ec-pro-size">
-                                <span class="ec-pro-opt-label">Size</span>
-                                <ul class="ec-opt-size">
-                                    <li class="active"><a href="#" class="ec-opt-sz"
-                                                          data-old="$40.00" data-new="$30.00"
-                                                          data-tooltip="Small">S</a></li>
-                                    <li><a href="#" class="ec-opt-sz" data-old="$50.00"
-                                           data-new="$40.00" data-tooltip="Medium">M</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mb-6 pro-gl-content">
-                <div class="ec-product-inner">
-                    <div class="ec-pro-image-outer">
-                        <div class="ec-pro-image">
-                            <a href="product-left-sidebar.html" class="image">
-                                <img class="main-image"
-                                     src="assets/images/product-image/2_1.jpg" alt="Product" />
-                                <img class="hover-image"
-                                     src="assets/images/product-image/2_2.jpg" alt="Product" />
-                            </a>
-                            <span class="percentage">20%</span>
-                            <span class="flags">
-                                    <span class="new">New</span>
-                                </span>
-                            <a href="#" class="quickview" data-link-action="quickview"
-                               title="Quick view" data-bs-toggle="modal"
-                               data-bs-target="#ec_quickview_modal"><img
-                                    src="assets/images/icons/quickview.svg" class="svg_img pro_svg"
-                                    alt="" /></a>
-                            <div class="ec-pro-actions">
-                                <a href="compare.html" class="ec-btn-group compare"
-                                   title="Compare"><img src="assets/images/icons/compare.svg"
-                                                        class="svg_img pro_svg" alt="" /></a>
-                                <button title="Add To Cart" class=" add-to-cart"><img
-                                        src="assets/images/icons/cart.svg" class="svg_img pro_svg"
-                                        alt="" /> Add To Cart</button>
-                                <a class="ec-btn-group wishlist" title="Wishlist"><img
-                                        src="assets/images/icons/wishlist.svg"
-                                        class="svg_img pro_svg" alt="" /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ec-pro-content">
-                        <h5 class="ec-pro-title"><a href="product-left-sidebar.html">Jumbo Carry Bag</a></h5>
-                        <div class="ec-pro-rating">
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star fill"></i>
-                            <i class="ecicon eci-star"></i>
-                        </div>
-                        <div class="ec-pro-list-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dutmmy text ever since the 1500s, when an unknown printer took a galley.</div>
-                        <span class="ec-price">
-                                <span class="old-price">$50.00</span>
-                                <span class="new-price">$40.00</span>
-                            </span>
-                        <div class="ec-pro-option">
-                            <div class="ec-pro-color">
-                                <span class="ec-pro-opt-label">Color</span>
-                                <ul class="ec-opt-swatch ec-change-img">
-                                    <li class="active"><a href="#" class="ec-opt-clr-img"
-                                                          data-src="assets/images/product-image/2_1.jpg"
-                                                          data-src-hover="assets/images/product-image/2_2.jpg"
-                                                          data-tooltip="Gray"><span
-                                                style="background-color:#fdbf04;"></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 shop-all-btn"><a href="#">Shop All Collection</a></div>
-        </div>
-    </div>
-</section>
-<!-- New Product end -->
+
 
 <?php include 'footer.php'; ?>
 </body>
